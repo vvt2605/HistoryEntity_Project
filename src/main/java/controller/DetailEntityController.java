@@ -1,0 +1,183 @@
+package controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import constant.Constant;
+import dataParser.loadFileJson;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.scene.Cursor;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
+import javafx.stage.Stage;
+import model.BaseEntity;
+
+public class DetailEntityController {
+
+	@FXML
+	private Label typeDetaiLabel;
+	@FXML
+	private TextFlow descriptionDetaiLabel;
+	@FXML
+	private Button btnBack;
+	@FXML 
+	private VBox VboxAddInfor;
+	@FXML 
+	private VBox VboxRelated;
+	@FXML 
+	private Label titleDetail;
+	
+	private String idString;
+	@FXML 
+	public void initial() {
+	    btnBack.setStyle("-fx-background-radius: 8px; -fx-background-color: #ffffff; -fx-opacity: 0.7;-fx-font-size: 18px;");
+	}
+	
+	public void detailView(String id ) {
+		 VboxAddInfor.setPrefHeight(VBox.USE_COMPUTED_SIZE);
+		 VboxRelated.setPrefHeight(VBox.USE_COMPUTED_SIZE);
+		idString = id;
+			loadFileJson load = new loadFileJson();
+			BaseEntity entity = load.getEntityById(id);
+			if (entity.getType()== Constant.CHARACTER_ENTITY ) {
+				typeDetaiLabel.setText("Thông tin chi tiết về nhân vật lịch sử" );
+
+			} 
+			else if (entity.getType()== Constant.DYNASTY_ENTITY ) {
+				typeDetaiLabel.setText("Thông tin chi tiết về triều đại lịch sử" );
+
+			} 
+			else if (entity.getType()== Constant.FESTIVAL_ENTITY ) {
+				typeDetaiLabel.setText("Thông tin chi tiết về lễ hội văn hóa" );
+
+			} 
+			else if (entity.getType()== Constant.EVENT_ENTITY ) {
+				typeDetaiLabel.setText("Thông tin chi tiết về sự kiện lịch sử" );
+
+			} 
+			else if (entity.getType()== Constant.RELIC_PLACE_ENTITY ) {
+				typeDetaiLabel.setText("Thông tin chi tiết về danh lam thắng cảnh" );
+
+			} 
+			titleDetail.setText("Mô tả chi tiết về " + entity.getName());
+			
+			
+			
+			Text text = new Text(entity.getDescription() );
+			text.setFont(Font.font("System", 16));
+			descriptionDetaiLabel.getChildren().add(text);
+			
+			Map<String, String> addInfor = new HashMap<>();
+			addInfor = entity.getAdditionalInfo();
+			for (Map.Entry<String, String> entry : addInfor.entrySet()) {
+				String key = entry.getKey();
+				String value = entry.getValue();
+				Text textInfor = new Text(key + ": " + value);
+				textInfor.setFont(Font.font("System", 16));
+				TextFlow infor = new TextFlow(textInfor);
+				VBox.setMargin(infor, new Insets(4,4,4,4));
+				VboxAddInfor.getChildren().add(infor);
+			}
+			List<String> relatedId = new ArrayList<>();
+			relatedId = entity.getRelatedEntityIds();
+			for (int i = 0 ; i< relatedId.size();i++) {
+				String relateIdBtn = relatedId.get(i);
+				BaseEntity btnRelated =  load.getEntityById(relatedId.get(i));
+				Button button = new Button(btnRelated.getName());
+				
+				 button.setOnAction(new EventHandler<ActionEvent>() {
+						
+						@Override
+						public void handle(ActionEvent event) {
+							try {
+								relatedBtnAction(event,relateIdBtn );
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+					});
+				VBox.setMargin(button, new Insets(4,4,4,4));
+				
+				VboxRelated.getChildren().add(button);
+			}
+			
+			
+	}
+	// action of btn related
+	public void relatedBtnAction(ActionEvent event, String id) throws IOException {
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/DetailEntityView.fxml"));
+		Parent detailParent = loader.load();			
+		Scene scene = new Scene(detailParent);
+		DetailEntityController detailController = loader.getController();
+		detailController.detailView(id);
+		stage.setScene(scene);
+	}
+	
+    //hover and without hover
+    public void btnBackHover(MouseEvent event) {
+	 	btnBack.setCursor(Cursor.HAND);
+        btnBack.setStyle("-fx-background-radius: 8px; -fx-background-color: #f2f6fe; -fx-opacity: 1; -fx-font-size: 18px;");
+    	}
+    public void btnBackWithoutHover(MouseEvent event) {
+    btnBack.setStyle("-fx-background-radius: 8px; -fx-background-color: #ffffff; -fx-opacity: 0.7; -fx-font-size: 18px;");
+	}
+    
+    //back action    
+    public void backAction(ActionEvent event) throws IOException {
+    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/listEntity.fxml"));
+		Parent detailParent = loader.load();
+		Scene scene = new Scene(detailParent);
+		
+		loadFileJson load = new loadFileJson();
+		BaseEntity entity = load.getEntityById(idString);
+		
+		listEntityController listEntityController = loader.getController();
+		listEntityController.createList(entity.getType());
+		String type = entity.getType();
+		listEntityController.createList(type);
+		if (type == Constant.CHARACTER_ENTITY) {
+			listEntityController.setTitleList("Danh sách các nhân vật lịch sử");
+
+		} 
+		else if (type == Constant.DYNASTY_ENTITY) {
+			listEntityController.setTitleList("Danh sách các triều đại lịch sử");
+
+		}
+		 else if (type == Constant.EVENT_ENTITY) {
+				listEntityController.setTitleList("Danh sách các sự kiện lịch sử");
+
+			}
+		 else if (type == Constant.FESTIVAL_ENTITY) {
+				listEntityController.setTitleList("Danh sách các Lễ hội");
+
+			}
+		 else if (type == Constant.RELIC_PLACE_ENTITY) {
+				listEntityController.setTitleList("Danh sách các danh lam thắng cảnh");
+
+			}
+		stage.setScene(scene);
+    }
+
+    
+
+}
