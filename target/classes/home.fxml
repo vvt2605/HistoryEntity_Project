@@ -89,9 +89,9 @@
                </children>
             </VBox>
          </children></AnchorPane>
-      <ImageView fitHeight="756.0" fitWidth="1129.0" layoutX="300.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="708.0" fitWidth="1139.0" layoutX="296.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/C:/Workspace/Java/HistoryEntity13/src/main/resources/bg.jpg" />
+            <Image url="@backgr1.png" />
          </image>
       </ImageView>
    </children>

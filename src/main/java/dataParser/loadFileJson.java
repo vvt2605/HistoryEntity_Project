@@ -1,6 +1,7 @@
 package dataParser;
 
 import java.io.FileReader;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -15,6 +16,7 @@ import org.json.simple.parser.JSONParser;
 
 import model.BaseEntity;
 
+
 public class loadFileJson {
     private Map<String, BaseEntity> allEntities;
 
@@ -28,10 +30,10 @@ public class loadFileJson {
 
     // danh sách thực thể theo loại
     public List<BaseEntity> getAllEntityIdsOfType(String type) {
-    	if (type == "Tất cả") {
-    		List<BaseEntity> list = new LinkedList<BaseEntity>();
+
+        if (type.equals("Tất cả")) {
+            List<BaseEntity> list = new LinkedList<BaseEntity>();
             for (Map.Entry<String, BaseEntity> entry : allEntities.entrySet()) {
-               
                 list.add(entry.getValue());
             }
             Collections.sort(list, new Comparator<BaseEntity>() {
@@ -40,8 +42,11 @@ public class loadFileJson {
                     return s1.getName().compareToIgnoreCase(s2.getName());
                 }
             });
+            System.out.println(allEntities);
+
             return list;
-    	}
+        }
+        
         List<BaseEntity> list = new LinkedList<BaseEntity>();
         for (Map.Entry<String, BaseEntity> entry : allEntities.entrySet()) {
             if (entry.getValue().getType().equals(type)) {
@@ -54,8 +59,11 @@ public class loadFileJson {
                 return s1.getName().compareToIgnoreCase(s2.getName());
             }
         });
+        System.out.println(allEntities);
+
         return list;
     }
+
 
     // thực thể theo ID
     public BaseEntity getEntityById(String id) {
@@ -121,24 +129,83 @@ public class loadFileJson {
     }
 
     public void loadFromFileJson() {
-        // TODO Auto-generated constructor stub
-        allEntities = new HashMap<String, BaseEntity>();
+    	allEntities = new HashMap<String, BaseEntity>();
+ 		// TODO Auto-generated constructor stub
+ 			allEntities = new HashMap<String, BaseEntity>();
+ 			
+ 			JSONParser parser = new JSONParser();
+			try {
+				
+		        JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("C:\\\\Workspace\\\\Java\\\\HistoryEntity13\\\\src\\\\main\\\\resources\\\\datanew.json"));
+		       for (int i = 0; i < jsonArray.size();i++) {
+		    	   JSONObject jsonObject2 = (JSONObject) jsonArray.get(i);
+		    	   BaseEntity e = parseDataToEntities.toEntity(jsonObject2);
+		    	   allEntities.put(e.getId(), e);
+		    	  // System.out.println("load data successfully!" +i+ e.getName());
+		       }
+		        System.out.println("load data successfully!");
+		       // System.out.println(allEntities);
+				
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+ 	 }
+    
+    /*
+    public static void main(String[] args) { 
+		  Map<String, BaseEntity> allEntities;
+		// TODO Auto-generated constructor stub
+			allEntities = new HashMap<String, BaseEntity>();
+			
+			JSONParser parser = new JSONParser();
+			try {
+				JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("C:\\Workspace\\Java\\HistoryEntity13\\src\\main\\resources\\dataTest.json"));
+				//JSONObject jsonInfor = (JSONObject) jsonObject.get("AppInfo");
+				
+				JSONArray entities =  (JSONArray) jsonObject.get("Entities");
+				@SuppressWarnings("unchecked")
+				Iterator<JSONObject> iterator = ((List<JSONObject>) entities).iterator(); 
+		        while (iterator.hasNext()) {
+		        	JSONObject jObject = iterator.next();
+		        	BaseEntity e = parseDataToEntities.toEntity(jObject);
+		        	allEntities.put(e.getId(), e);
+		        	System.out.println("load data successfully!" + e.getName());
+			        //System.out.println(jObject);
 
-        JSONParser parser = new JSONParser();
-        try {
-            JSONObject jsonObject = (JSONObject) parser.parse(new FileReader("C:\\Workspace\\Java\\HistoryEntity13\\src\\main\\resources\\data.json"));
-            JSONArray entities = (JSONArray) jsonObject.get("Entities");
-            @SuppressWarnings("unchecked")
-            Iterator<JSONObject> iterator = ((List<JSONObject>) entities).iterator();
-            while (iterator.hasNext()) {
-                JSONObject jObject = iterator.next();
-                BaseEntity e = parseDataToEntities.toEntity(jObject);
-                allEntities.put(e.getId(), e);
-            }
-            //System.out.println("load data successfully!");
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+		        }
+		       
+		        System.out.println("load data successfully!");
+		        System.out.println(allEntities.get("d1fb1b77-453e-4267-a204-586f5830bf7c"));
+				
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+	 }
+	 */
+    public static void main(String[] args) { 
+		  Map<String, BaseEntity> allEntities;
+		// TODO Auto-generated constructor stub
+			allEntities = new HashMap<String, BaseEntity>();
+			
+			JSONParser parser = new JSONParser();
+			try {
+				
+		        JSONArray jsonArray = (JSONArray) parser.parse(new FileReader("C:\\\\Workspace\\\\Java\\\\HistoryEntity13\\\\src\\\\main\\\\resources\\\\data.json"));
+		       for (int i = 0; i < jsonArray.size();i++) {
+		    	   JSONObject jsonObject2 = (JSONObject) jsonArray.get(i);
+		    	   BaseEntity e = parseDataToEntities.toEntity(jsonObject2);
+		    	   allEntities.put(e.getId(), e);
+		    	  // System.out.println("load data successfully!" +i+ e.getName());
+		       }
+		        System.out.println("load data successfully!");
+		       // System.out.println(allEntities);
+				
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
+	 }
+	 
 }

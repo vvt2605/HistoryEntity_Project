@@ -21,7 +21,7 @@ import model.RelicPlaceEntity;
 
 
 public class parseDataToEntities {
-
+	
 	//tạo đối tuợng thực thể 
 	public static BaseEntity toEntity(JSONObject object) {
 		String id = getStringFromJson(object, Constant.ENTITY_ID);
@@ -43,7 +43,7 @@ public class parseDataToEntities {
 		    entity.setRootURL(rootUrl);
 
 	       // System.out.println(entity.getName());
-
+		    
 		    return entity;
 	}
 	
@@ -106,6 +106,7 @@ public class parseDataToEntities {
 	        return new BaseEntity();
 	    }
 	}
+	
 	
 
 }

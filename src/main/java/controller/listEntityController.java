@@ -2,6 +2,7 @@ package controller;
 
 
 import java.io.IOException;
+
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,12 @@ public class listEntityController {
 	
 	@FXML 
 	public Label titleList;
+	
+	private static  String prevous = new String();
+	
+	public void setPrevous(String prevous) {
+		this.prevous = prevous;
+	}
 	
 	public void setTitleList(String title) {
 		titleList.setText(title);
@@ -108,7 +115,8 @@ public class listEntityController {
 	    btnBack.setStyle("-fx-background-radius: 8px; -fx-background-color: #ffffff; -fx-opacity: 0.7;-fx-font-size: 18px;");
 	    loadFileJson load = new loadFileJson();
 	    List<BaseEntity> entities = load.getAllEntityIdsOfType(type);
-	    
+        System.out.println(entities);
+
 	    for (int i = 0; i < entities.size(); i++) {
 	    	int index = i + 1;
 	        Button button = new Button(index + "." +entities.get(i).getName());

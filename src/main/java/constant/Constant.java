@@ -11,7 +11,7 @@ public class Constant {
 	public final static String ENTITY_NAME = "Name";
 	public final static String ENTITY_DESCRIPTION = "Description";
 	public final static String ENTITY_ADDITIONAL_INFOR = "AdditionalInfo";
-	public final static String ENTITY_RELATED_ENTITY_IDS = "RelatedEntityIds";
+	public final static String ENTITY_RELATED_ENTITY_IDS = "Related object";
 	public final static String ENTITY_TYPE = "Type";
 	public final static String ENTITY_ROOT_URL = "RootURL";
 	
