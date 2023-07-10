@@ -9,10 +9,12 @@ import java.util.Map;
 import constant.Constant;
 import dataParser.loadFileJson;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -99,7 +101,8 @@ public class DetailEntityController {
 				String relateIdBtn = relatedId.get(i);
 				BaseEntity btnRelated =  load.getEntityById(relatedId.get(i));
 				Button button = new Button(btnRelated.getName());
-				
+		        button.setStyle("-fx-background-radius: 8px; -fx-background-color: #ebe9e4; -fx-opacity: 1; -fx-font-size: 16px;");
+
 				 button.setOnAction(new EventHandler<ActionEvent>() {
 						
 						@Override
@@ -112,8 +115,28 @@ public class DetailEntityController {
 							}
 						}
 					});
-				VBox.setMargin(button, new Insets(4,4,4,4));
+				 button.setOnMouseEntered(new EventHandler<Event>() {
+
+					@Override
+					public void handle(Event event) {
+						// TODO Auto-generated method stub
+						button.setCursor(Cursor.HAND);
+						button.setStyle("-fx-background-color: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%); -fx-background-radius: 8px; -fx-opacity: 1; -fx-font-size: 16px;");
+					}
 				
+				 }
+				 );
+				 button.setOnMouseExited(new EventHandler<Event>() {
+
+					@Override
+					public void handle(Event event) {
+						// TODO Auto-generated method stub
+						button.setStyle("-fx-background-radius: 8px; -fx-background-color: #ebe9e4; -fx-opacity: 1; -fx-font-size: 16px;");
+					}
+				});
+				VBox.setMargin(button, new Insets(4,4,4,4));
+				button.prefWidthProperty().bind(VboxRelated.widthProperty().divide(1));
+		        VboxRelated.setAlignment(Pos.CENTER);
 				VboxRelated.getChildren().add(button);
 			}
 			
@@ -134,7 +157,7 @@ public class DetailEntityController {
     //hover and without hover
     public void btnBackHover(MouseEvent event) {
 	 	btnBack.setCursor(Cursor.HAND);
-        btnBack.setStyle("-fx-background-radius: 8px; -fx-background-color: #f2f6fe; -fx-opacity: 1; -fx-font-size: 18px;");
+        btnBack.setStyle("-fx-background-radius: 8px; -fx-background-color: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%); -fx-opacity: 1; -fx-font-size: 18px;");
     	}
     public void btnBackWithoutHover(MouseEvent event) {
     btnBack.setStyle("-fx-background-radius: 8px; -fx-background-color: #ffffff; -fx-opacity: 0.7; -fx-font-size: 18px;");

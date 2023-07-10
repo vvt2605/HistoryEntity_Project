@@ -2,8 +2,12 @@ package controller;
 
 import java.io.IOException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import constant.Constant;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -23,24 +28,45 @@ public class HomeController {
     @FXML
     public Button btnDynasty;
     @FXML
-    public Button btnEvent;
+    public Button btnStatistic;
     @FXML
     public Button btnFestival;
     @FXML
     public Button btnRelic;
     @FXML 
     public Button btnSearch;
+    @FXML
+    public Button btnUpdateData;
+    
+    @FXML
+    public Label updateLabel;
 
     //hover và khi thoat hover
     public void initialize() {
     	
     	handleExitHover(btnCharacter);
     	handleExitHover(btnDynasty);
-    	handleExitHover(btnEvent);
+    	handleExitHover(btnStatistic);
     	handleExitHover(btnRelic);
     	handleExitHover(btnFestival);
+    	handleExitHover(btnSearch);
     	btnHome.setStyle("-fx-opacity: 1; -fx-background-color: #2262C6;-fx-background-radius: 8px;");	
-	
+    	btnUpdateData.setOnMouseEntered(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				// TODO Auto-generated method stub
+				btnUpdateData.setStyle("-fx-cursor: hand;-fx-opacity: 1; -fx-background-color: #2262C6;-fx-background-radius: 8px; ");
+			}
+		});
+    	btnUpdateData.setOnMouseExited(new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				// TODO Auto-generated method stub
+				btnUpdateData.setStyle("-fx-opacity: 0.7; -fx-background-color: #2262C6;-fx-background-radius: 8px; ");
+			}
+		});
     	
     }
 //thoát hover
@@ -63,8 +89,8 @@ public class HomeController {
         	btnDynasty.setStyle("-fx-cursor: hand;-fx-opacity: 1; -fx-background-color: #2262C6;-fx-background-radius: 8px; ");
 
     	}
-    	else if (event.getSource()== btnEvent) {
-        	btnEvent.setStyle("-fx-cursor: hand;-fx-opacity: 1; -fx-background-color: #2262C6;-fx-background-radius: 8px; ");
+    	else if (event.getSource()== btnStatistic) {
+    		btnStatistic.setStyle("-fx-cursor: hand;-fx-opacity: 1; -fx-background-color: #2262C6;-fx-background-radius: 8px; ");
 
     	}
     	else if (event.getSource()== btnFestival) {
@@ -92,10 +118,7 @@ public class HomeController {
     		actionPress(event, "Danh sách các triều đại lịch sử", Constant.DYNASTY_ENTITY);
 
     	}
-    	else if (event.getSource()== btnEvent) {
-    		actionPress(event, "Danh sách các sự kiện lịch sử", Constant.EVENT_ENTITY);
-
-    	}
+    	
     	else if (event.getSource()== btnFestival) {
     		actionPress(event, "Danh sách các Lễ hội", Constant.FESTIVAL_ENTITY);
 
@@ -128,6 +151,23 @@ public class HomeController {
 		Parent detailParent = loader.load();
 		Scene scene = new Scene(detailParent);
 		stage.setScene(scene);
+    }
+    
+    public void pressStatistic(ActionEvent event) throws IOException {
+    	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/statistic.fxml"));
+		Parent detailParent = loader.load();
+		Scene scene = new Scene(detailParent);
+		stage.setScene(scene);
+    }
+    @FXML
+    public void pressUpdateData(ActionEvent event) {
+    	LocalDateTime currentTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String formattedTime = currentTime.format(formatter);
+        updateLabel.setText("Cập nhật mới nhất lúc: "+formattedTime);
+        System.out.println("Button pressed at: " + formattedTime);
     }
 
     

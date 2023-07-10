@@ -22,23 +22,7 @@
                      <VBox.margin>
                         <Insets left="40.0" />
                      </VBox.margin></Button>
-                  <Button fx:id="btnDynasty" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#pressBtnEntity" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Triều đại" textFill="WHITE">
-                     <font>
-                        <Font name="Times New Roman" size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin>
-                  </Button>
                   <Button fx:id="btnFestival" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#pressBtnEntity" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Lễ hội" textFill="WHITE">
-                     <font>
-                        <Font name="Times New Roman" size="18.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="40.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button fx:id="btnEvent" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#pressBtnEntity" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Sự kiện lịch sử" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>
@@ -62,24 +46,29 @@
                         <Insets left="40.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="btnSearch" alignment="CENTER" mnemonicParsing="false" onAction="#pressSearchBtn" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Tìm kiếm thông tin" textFill="WHITE">
+                  <Button fx:id="btnSearch" alignment="CENTER" mnemonicParsing="false" onAction="#pressSearchBtn" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="245.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Tìm kiếm thông tin" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>
                   </Button>
-                  <Button fx:id="btnStatistic" alignment="CENTER" mnemonicParsing="false" onAction="#pressSearchBtn" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="185.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Thống kê" textFill="WHITE">
+                  <Button fx:id="btnDynasty" alignment="CENTER" mnemonicParsing="false" onAction="#pressBtnEntity" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="294.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Dòng Sự kiện và Triều đại" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>
                   </Button>
-                  <AnchorPane prefHeight="358.0" prefWidth="296.0">
+                  <Button fx:id="btnStatistic" alignment="CENTER" mnemonicParsing="false" onAction="#pressStatistic" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="226.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Thống kê dữ liệu" textFill="WHITE">
+                     <font>
+                        <Font name="Times New Roman" size="18.0" />
+                     </font>
+                  </Button>
+                  <AnchorPane prefHeight="356.0" prefWidth="296.0">
                      <children>
-                        <Label alignment="CENTER" layoutY="317.0" prefHeight="46.0" prefWidth="296.0" text="Group 11 Bản cập nhật 7/7/2023" textFill="WHITE">
+                        <Label fx:id="updateLabel" alignment="CENTER" layoutY="348.0" prefHeight="24.0" prefWidth="296.0" text="Cập nhật mới nhât lúc:  2023-07-10 17:48:47" textFill="WHITE">
                            <font>
-                              <Font size="16.0" />
+                              <Font size="12.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnStatistic1" alignment="CENTER" layoutX="-16.0" layoutY="276.0" mnemonicParsing="false" onAction="#pressSearchBtn" onMouseEntered="#btnHover" prefHeight="46.0" prefWidth="297.0" style="-fx-background-color: #2262C6; -fx-background-radius: 8px;" text="Cập nhật" textFill="WHITE">
+                        <Button fx:id="btnUpdateData" alignment="CENTER" layoutX="-16.0" layoutY="302.0" mnemonicParsing="false" onAction="#pressUpdateData" onMouseEntered="#btnHover" prefHeight="46.0" prefWidth="297.0" style="-fx-background-color: #2262C6; -fx-background-radius: 8px;" text="Cập nhật dữ liệu" textFill="WHITE">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
@@ -89,9 +78,9 @@
                </children>
             </VBox>
          </children></AnchorPane>
-      <ImageView fitHeight="708.0" fitWidth="1139.0" layoutX="296.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="691.0" fitWidth="1139.0" layoutX="296.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@backgr1.png" />
+            <Image url="file:/C:/Workspace/Java/HistoryEntity13/src/main/resources/backgr1.png" />
          </image>
       </ImageView>
    </children>

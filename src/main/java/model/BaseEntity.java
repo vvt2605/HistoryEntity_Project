@@ -1,6 +1,7 @@
 package model;
 
 import java.util.HashMap;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,14 @@ public class BaseEntity {
 		this.addInfor = addInfor;
 		this.description = description;
 		
+	}
+	public boolean isContainInEntity(String text) {
+		return this.getName().contains(text) || this.getAdditionalInfo().values().toString().contains(text) || this.getDescription().contains(text);  
+	}
+	
+	public void addRelatedEntity(String entityId) {
+		if(!this.relatedEntityIds.contains(entityId))
+			this.relatedEntityIds.add(entityId);
 	}
 	
 	
@@ -84,10 +93,6 @@ public class BaseEntity {
 			return "BaseEntity";
 		}
 
-	
-	
-	
-	
-	
+
 
 }

@@ -42,7 +42,7 @@ public class loadFileJson {
                     return s1.getName().compareToIgnoreCase(s2.getName());
                 }
             });
-            System.out.println(allEntities);
+            //System.out.println(allEntities);
 
             return list;
         }
@@ -59,7 +59,7 @@ public class loadFileJson {
                 return s1.getName().compareToIgnoreCase(s2.getName());
             }
         });
-        System.out.println(allEntities);
+        //System.out.println(allEntities);
 
         return list;
     }

@@ -12,6 +12,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -115,15 +116,15 @@ public class listEntityController {
 	    btnBack.setStyle("-fx-background-radius: 8px; -fx-background-color: #ffffff; -fx-opacity: 0.7;-fx-font-size: 18px;");
 	    loadFileJson load = new loadFileJson();
 	    List<BaseEntity> entities = load.getAllEntityIdsOfType(type);
-        System.out.println(entities);
+       // System.out.println(entities);
 
 	    for (int i = 0; i < entities.size(); i++) {
 	    	int index = i + 1;
-	        Button button = new Button(index + "." +entities.get(i).getName());
+	        Button button = new Button(index + ".  " +entities.get(i).getName());
 	        button.setLayoutY(10);
-	        button.setPrefWidth(800);
+	        button.setPrefWidth(400);
 	        button.setPrefHeight(40);
-	        button.setStyle("-fx-margin-left: 12px; -fx-margin-right: 12px; -fx-background-color: #ffffff; -fx-opacity: 1; -fx-font-size: 18px;");
+	        button.setStyle("-fx-background-radius: 16px; -fx-margin-left: 12px; -fx-margin-right: 12px; -fx-background-color: #ffffff; -fx-opacity: 1; -fx-font-size: 18px;");
 	        button.setCursor(Cursor.HAND);
 	        handleExitHover(button);
 	        String id = entities.get(i).getId();
@@ -135,10 +136,13 @@ public class listEntityController {
 					e.printStackTrace();
 				}
 	        });
+	        //set tỉ lệ button so vs box chứa nó và set center
+	        button.prefWidthProperty().bind(listButtons.widthProperty().divide(2));
+	        button.setAlignment(Pos.BASELINE_LEFT);
 	        
-	        button.prefWidthProperty().bind(listButtons.widthProperty());
 	        VBox.setMargin(button, new Insets(4, 4, 4, 4));
 	        listButtons.getChildren().add(button);
+	        listButtons.setAlignment(Pos.CENTER);
 	    }
 	}
 	
@@ -171,7 +175,7 @@ public class listEntityController {
 				@Override
 				public void handle(MouseEvent event) {
 					// TODO Auto-generated method stub
-		            button.setStyle("-fx-margin-left: 12px; -fx-margin-right: 12px; -fx-background-color: #f2f6fe; -fx-opacity: 1; -fx-font-size: 18px;");
+		            button.setStyle("-fx-background-radius: 16px; -fx-margin-left: 12px; -fx-margin-right: 12px; -fx-background-color: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%); -fx-opacity: 1; -fx-font-size: 18px;");
 				
 				}
 			});
@@ -179,18 +183,20 @@ public class listEntityController {
 				@Override
 				public void handle(MouseEvent event) {
 					
-		            button.setStyle("-fx-margin-left: 12px; -fx-margin-right: 12px; -fx-background-color: #ffffff; -fx-opacity: 1; -fx-font-size: 18px;");
+		            button.setStyle("-fx-background-radius: 16px; -fx-margin-left: 12px; -fx-margin-right: 12px; -fx-background-color: #ffffff; -fx-opacity: 1; -fx-font-size: 18px;");
 				}
 			});
 	    	
 	    }
+		@FXML
 		public void btnBackHover(MouseEvent event) {
 			 	btnBack.setCursor(Cursor.HAND);
 
-	            btnBack.setStyle("-fx-background-radius: 8px; -fx-background-color: #f2f6fe; -fx-opacity: 1; -fx-font-size: 18px;");
+	            btnBack.setStyle("-fx-background-radius: 8px; -fx-background-color: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%); -fx-opacity: 1; -fx-font-size: 18px;");
 			
 	    	
 		}
+		@FXML
 		public void btnBackWithoutHover(MouseEvent event) {
             btnBack.setStyle("-fx-background-radius: 8px; -fx-background-color: #ffffff; -fx-opacity: 0.7; -fx-font-size: 18px;");
 			}

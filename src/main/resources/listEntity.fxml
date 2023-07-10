@@ -9,16 +9,16 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.listEntityController">
    <children>
-      <Button fx:id="btnBack" layoutY="3.0" mnemonicParsing="false" onAction="#backHome" onMouseEntered="#btnBackHover" onMouseExited="#btnBackWithoutHover" prefHeight="50.0" prefWidth="104.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8;" text="&lt; Back">
+      <Button fx:id="btnBack" layoutY="-1.0" mnemonicParsing="false" onAction="#backHome" onMouseEntered="#btnBackHover" onMouseExited="#btnBackWithoutHover" prefHeight="50.0" prefWidth="104.0" style="-fx-background-color: #ffffff; -fx-background-radius: 8;" text="&lt; Back">
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Label fx:id="titleList" alignment="CENTER" layoutX="191.0" layoutY="3.0" prefHeight="42.0" prefWidth="534.0" style="-fx-background-color: #ffffff;" textFill="#57596d">
+      <Label fx:id="titleList" alignment="CENTER" layoutX="191.0" layoutY="3.0" prefHeight="42.0" prefWidth="837.0" style="-fx-background-color: #ffffff;" textFill="#57596d">
          <font>
             <Font name="Calibri" size="23.0" />
          </font>
       </Label>
-      <AnchorPane layoutY="44.0" prefHeight="559.0" prefWidth="901.0" style="-fx-background-color: #ffffff;">
+      <AnchorPane layoutY="51.0" prefHeight="759.0" prefWidth="1438.0" style="-fx-background-color: #ffffff;">
          <children>
             <ScrollPane layoutX="-2.0" layoutY="6.0" prefHeight="759.0" prefWidth="1440.0" style="-fx-background-color: #ffffff;" vbarPolicy="ALWAYS">
                <content>

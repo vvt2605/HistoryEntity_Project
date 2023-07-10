@@ -15,12 +15,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -40,9 +43,12 @@ public class SearchController implements Initializable {
 	private VBox listEntitySearch ;
 	@FXML
 	private TextField inputSearch;
+	
+	@FXML 
+	private ScrollPane scrollPaneSearch;
 	private String typeInput="Tất cả";
 
-    ObservableList<String> list = FXCollections.observableArrayList("Tất cả","Nhân vật lịch sử", "Sự kiện lịch sử", "Triều đại lịch sử", "Lễ hội văn hóa ", "Danh lam thắng cảnh");
+    ObservableList<String> list = FXCollections.observableArrayList("Tất cả","Nhân vật lịch sử", "Sự kiện và triều đại lịch sử", "Lễ hội văn hóa ", "Danh lam thắng cảnh");
     //tạo list combobox
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -58,18 +64,16 @@ public class SearchController implements Initializable {
     // khi nhấn enter hoặc button search
     @FXML
     public void handleSearchButtonAction() {
-    	
+    	scrollPaneSearch.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     	String searchTerm = inputSearch.getText();
     	String typeCombobox= listTypeSearch.getValue();
     	if (typeCombobox == "Nhân vật lịch sử" ) {
     		typeInput = Constant.CHARACTER_ENTITY;
     	}
-    	else if (typeCombobox == "Sự kiện lịch sử" ) {
-    		typeInput = Constant.EVENT_ENTITY;
-    	}
-    	else if (typeCombobox ==  "Triều đại lịch sử" ) {
+    	else if (typeCombobox == "Sự kiện và triều đại lịch sử" ) {
     		typeInput = Constant.DYNASTY_ENTITY;
     	}
+    	
     	else if (typeCombobox == "Lễ hội văn hóa " ) {
     		typeInput = Constant.FESTIVAL_ENTITY;
     	}
@@ -88,36 +92,49 @@ public class SearchController implements Initializable {
         loadFileJson load = new loadFileJson();
         List<BaseEntity> listEntity = load.getAllEntityIdsOfType(typeInput);
         List<BaseEntity> entities = load.getEntityByNameWithoutAccentsAndType(searchTerm, listEntity);
-        	
+        System.out.println(entities);
+        	if (entities.isEmpty()) {
+        		System.out.println(entities);
+        		Label label = new Label("Không có dữ liệu");
+        		label.setStyle(" -fx-font-size: 18px;");
+        		VBox.setMargin(label, new Insets(16, 16, 16, 16));
+    	        listEntitySearch.setAlignment(Pos.CENTER);
+
+        		listEntitySearch.getChildren().add(label);
+        	} 
+        	else {
+        		 for (int i = 0; i < entities.size(); i++) {
+        		    	int index = i + 1;
+        		        Button button = new Button(index + "." +entities.get(i).getName());
+        		        button.setLayoutY(10);
+        		        button.setPrefWidth(800);
+        		        button.setPrefHeight(40);
+        		        button.setStyle("-fx-background-radius: 16px; -fx-margin-left: 12px; -fx-margin-right: 12px; -fx-background-color: #ffffff; -fx-opacity: 1; -fx-font-size: 18px;");
+        		        button.setCursor(Cursor.HAND);
+        		        handleExitHover(button);
+        		        String id = entities.get(i).getId();
+        		        
+        			        button.setOnAction((ActionEvent eventAction)-> {
+        			        	try {
+        			        		changeDetailView(eventAction, id);
+        						} catch (IOException e) {
+        							// TODO Auto-generated catch block
+        							e.printStackTrace();
+        						}
+        			        });
+        		         
+        		        
+        		        button.prefWidthProperty().bind(listEntitySearch.widthProperty());
+        		        VBox.setMargin(button, new Insets(4, 4, 4, 4));
+        		        listEntitySearch.getChildren().add(button);
+        		    }
+        		
+        	}
     	
     	
     	
 	    
-	    for (int i = 0; i < entities.size(); i++) {
-	    	int index = i + 1;
-	        Button button = new Button(index + "." +entities.get(i).getName());
-	        button.setLayoutY(10);
-	        button.setPrefWidth(800);
-	        button.setPrefHeight(40);
-	        button.setStyle("-fx-margin-left: 12px; -fx-margin-right: 12px; -fx-background-color: #ffffff; -fx-opacity: 1; -fx-font-size: 18px;");
-	        button.setCursor(Cursor.HAND);
-	        handleExitHover(button);
-	        String id = entities.get(i).getId();
-	        
-		        button.setOnAction((ActionEvent eventAction)-> {
-		        	try {
-		        		changeDetailView(eventAction, id);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-		        });
-	         
-	        
-	        button.prefWidthProperty().bind(listEntitySearch.widthProperty());
-	        VBox.setMargin(button, new Insets(4, 4, 4, 4));
-	        listEntitySearch.getChildren().add(button);
-	    }
+	   
     }
     
 
@@ -139,7 +156,7 @@ public class SearchController implements Initializable {
 				@Override
 				public void handle(MouseEvent event) {
 					// TODO Auto-generated method stub
-		            button.setStyle("-fx-margin-left: 12px; -fx-margin-right: 12px; -fx-background-color: #f2f6fe; -fx-opacity: 1; -fx-font-size: 18px;");
+		            button.setStyle("-fx-background-radius: 16px; -fx-margin-left: 12px; -fx-margin-right: 12px;-fx-background-color: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%); -fx-opacity: 1; -fx-font-size: 18px;");
 				
 				}
 			});
@@ -147,7 +164,7 @@ public class SearchController implements Initializable {
 				@Override
 				public void handle(MouseEvent event) {
 					
-		            button.setStyle("-fx-margin-left: 12px; -fx-margin-right: 12px; -fx-background-color: #ffffff; -fx-opacity: 1; -fx-font-size: 18px;");
+		            button.setStyle("-fx-background-radius: 16px; -fx-margin-left: 12px; -fx-margin-right: 12px; -fx-background-color: #ffffff; -fx-opacity: 1; -fx-font-size: 18px;");
 				}
 			});
 	    	
@@ -158,7 +175,7 @@ public class SearchController implements Initializable {
 	@FXML
 	public void btnBackHover(MouseEvent event) {
 	 	backBtnSearch.setCursor(Cursor.HAND);
-        backBtnSearch.setStyle("-fx-background-radius: 8px; -fx-background-color: #f2f6fe; -fx-opacity: 1; -fx-font-size: 18px;");
+        backBtnSearch.setStyle("-fx-background-radius: 8px; -fx-background-color: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%); -fx-opacity: 1; -fx-font-size: 18px;");
 	}
 	@FXML
 	public void btnBackWithoutHover(MouseEvent event) {
