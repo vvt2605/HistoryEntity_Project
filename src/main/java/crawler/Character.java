@@ -138,7 +138,7 @@ public class Character extends AbstractCrawler {
                     CharacterEntity character = new CharacterEntity(name, addInfo, description.toString(), ROOT_URL);
                     character.setId(generateRandomId());
                     crawler.add(new CharacterEntity(name, addInfo, description.toString(), ROOT_URL));
-                    System.out.println("Crawl completed successfully!"+ name +addInfo+related );
+                    System.out.println(" +1 characters from NguoiKeSu! success" );
                   
                 }
             } catch (Exception e) {
@@ -165,7 +165,7 @@ public class Character extends AbstractCrawler {
     // Write the JSON data to a file
     try (FileWriter fileWriter = new FileWriter(Constant.JSON_PATH)) {
         fileWriter.write(jsonArray.toJSONString());
-        System.out.println("Crawled data written to JSON file: " + Constant.JSON_PATH);
+       // System.out.println("Crawled data written to JSON file: " + Constant.JSON_PATH);
     } catch (IOException e) {
         System.out.println("Error writing JSON file: " + e.getMessage());
     }

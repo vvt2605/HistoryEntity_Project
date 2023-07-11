@@ -34,11 +34,7 @@ public class listEntityController {
 	@FXML 
 	public Label titleList;
 	
-	private static  String prevous = new String();
 	
-	public void setPrevous(String prevous) {
-		this.prevous = prevous;
-	}
 	
 	public void setTitleList(String title) {
 		titleList.setText(title);
@@ -154,6 +150,8 @@ public class listEntityController {
 			Parent detailParent = loader.load();			
 			Scene scene = new Scene(detailParent);
 			DetailEntityController detailController = loader.getController();
+			detailController.setPreviousPage("list");
+			detailController.setId(id);
 			detailController.detailView(id);
 			stage.setScene(scene);
 			

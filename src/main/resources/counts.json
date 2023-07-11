@@ -1,11 +1,23 @@
 {
     "CharacterEntity_NguoiKeSu": 1452,
+    "linkedEachEntity": 14.0,
+    "totalLinked": 49834,
+    "Total character:": 1452,
     "FestivalEntity_NguoiKeSu": 0,
+    "Total Dynasty and Event:": 171,
     "CharacterEntity_Wiki": 0,
     "RelicPlaceEntity_NguoiKeSu": 22,
+    "Total Relic :": 1807,
     "RelicPlaceEntity_Wiki": 1785,
     "FestivalEntity_Wiki": 21,
+    "Total Festival:": 21,
+    "attributeCharacter": 10.0,
     "DynastyEntity_NguoiKeSu": 146,
+    "totalEntities": 3451,
     "Total Links": 24917,
-    "DynastyEntity_Wiki": 25
+    "attributeDynasty": 7.0,
+    "attributeRelic": 8.0,
+    "DynastyEntity_Wiki": 25,
+    "totalAttribute": 32759,
+    "attributeFestival": 8.0
 }

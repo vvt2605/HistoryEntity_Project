@@ -50,7 +50,7 @@ public class CharacterWiki extends AbstractCrawler {
 				}
 
 				crawler.add(new CharacterEntity(characterName, characterAdditionalInfo, characterDescription, rootURL));
-				System.out.println("+1 Character from Wikipedia" + characterName);
+				System.out.println("+1 Character from Wikipedia success" + characterName);
 				System.out.println(i+1);
 				i++;
 			}

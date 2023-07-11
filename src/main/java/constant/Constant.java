@@ -19,10 +19,6 @@ public class Constant {
 	public final static String FESTIVAL_ENTITY = "FestivalEntity";
 	public final static String RELIC_PLACE_ENTITY = "RelicPlaceEntity";
 	public final static String UNDEFINED_ENTITY = "UndefinedEntity";		
-	public final static String APP_INFO = "AppInfo";
-	public final static String UPDATE_TIME = "UpdateTime";
-	public final static String TOTAL_INFO = "TotalInfo";
-	public final static String SITE_INFO = "SiteInfo";
 	public final static String COUNT_LINKS = "CountLinks";
 	public static final String JSON_PATH = "C:\\Workspace\\Java\\HistoryEntity13\\src\\main\\resources\\data.json";
 	public static final Object ENTITY_ADDITIONAL_INFO = "AdditionalInfo";

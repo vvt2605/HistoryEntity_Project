@@ -30,7 +30,8 @@ import javafx.stage.Stage;
 import model.BaseEntity;
 
 public class DetailEntityController {
-
+	private static List<String> previousPage = new ArrayList<>();
+	private static String idPreviousPage;
 	@FXML
 	private Label typeDetaiLabel;
 	@FXML
@@ -48,6 +49,17 @@ public class DetailEntityController {
 	@FXML 
 	public void initial() {
 	    btnBack.setStyle("-fx-background-radius: 8px; -fx-background-color: #ffffff; -fx-opacity: 0.7;-fx-font-size: 18px;");
+	}
+	// lưu trang trước đó 
+	public void setPreviousPage(String string) {
+		System.out.println("Trước"+previousPage);
+		previousPage.add(string);
+		System.out.println("Sau "+ previousPage);
+		
+	}
+	//lưu id cho trường hợp từ id chuyển vào 
+	public void setId(String string) {
+		idPreviousPage = string;
 	}
 	
 	public void detailView(String id ) {
@@ -74,13 +86,9 @@ public class DetailEntityController {
 			} 
 			else if (entity.getType()== Constant.RELIC_PLACE_ENTITY ) {
 				typeDetaiLabel.setText("Thông tin chi tiết về danh lam thắng cảnh" );
-
 			} 
 			titleDetail.setText("Mô tả chi tiết về " + entity.getName());
-			
-			
-			
-			Text text = new Text(entity.getDescription() );
+			 Text text = new Text(entity.getDescription() );
 			text.setFont(Font.font("System", 16));
 			descriptionDetaiLabel.getChildren().add(text);
 			
@@ -108,7 +116,7 @@ public class DetailEntityController {
 						@Override
 						public void handle(ActionEvent event) {
 							try {
-								relatedBtnAction(event,relateIdBtn );
+								relatedBtnAction(event,relateIdBtn,entity.getId() );
 							} catch (IOException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -123,7 +131,6 @@ public class DetailEntityController {
 						button.setCursor(Cursor.HAND);
 						button.setStyle("-fx-background-color: linear-gradient(to right, #84fab0 0%, #8fd3f4 51%, #84fab0 100%); -fx-background-radius: 8px; -fx-opacity: 1; -fx-font-size: 16px;");
 					}
-				
 				 }
 				 );
 				 button.setOnMouseExited(new EventHandler<Event>() {
@@ -135,21 +142,21 @@ public class DetailEntityController {
 					}
 				});
 				VBox.setMargin(button, new Insets(4,4,4,4));
-				button.prefWidthProperty().bind(VboxRelated.widthProperty().divide(1));
+				button.prefWidthProperty().bind(VboxRelated.widthProperty().divide(1.5));
 		        VboxRelated.setAlignment(Pos.CENTER);
 				VboxRelated.getChildren().add(button);
-			}
-			
-			
+			}	
 	}
 	// action of btn related
-	public void relatedBtnAction(ActionEvent event, String id) throws IOException {
+	public void relatedBtnAction(ActionEvent event, String id, String previousId) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/DetailEntityView.fxml"));
 		Parent detailParent = loader.load();			
 		Scene scene = new Scene(detailParent);
 		DetailEntityController detailController = loader.getController();
+		detailController.setPreviousPage(id);
+		//System.out.println(id);
 		detailController.detailView(id);
 		stage.setScene(scene);
 	}
@@ -167,39 +174,91 @@ public class DetailEntityController {
     public void backAction(ActionEvent event) throws IOException {
     	Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/listEntity.fxml"));
-		Parent detailParent = loader.load();
-		Scene scene = new Scene(detailParent);
+		 if (previousPage.get(previousPage.size()-1)=="list" || previousPage.get(previousPage.size()-1) == "search" ) {
+			 if (previousPage.get(previousPage.size()-1)=="list" ) {
+				 previousPage.remove(previousPage.size()-1);
+				 	loader.setLocation(getClass().getResource("/listEntity.fxml"));
+					Parent detailParent = loader.load();
+					Scene scene = new Scene(detailParent);
+					
+					loadFileJson load = new loadFileJson();
+					BaseEntity entity = load.getEntityById(idString);
+					
+					listEntityController listEntityController = loader.getController();
+					listEntityController.createList(entity.getType());
+					String type = entity.getType();
+					listEntityController.createList(type);
+					if (type == Constant.CHARACTER_ENTITY) {
+						listEntityController.setTitleList("Danh sách các nhân vật lịch sử");
+
+					} 
+					else if (type == Constant.DYNASTY_ENTITY) {
+						listEntityController.setTitleList("Danh sách các triều đại lịch sử");
+
+					}
+					 else if (type == Constant.EVENT_ENTITY) {
+							listEntityController.setTitleList("Danh sách các sự kiện lịch sử");
+
+						}
+					 else if (type == Constant.FESTIVAL_ENTITY) {
+							listEntityController.setTitleList("Danh sách các Lễ hội");
+
+						}
+					 else if (type == Constant.RELIC_PLACE_ENTITY) {
+							listEntityController.setTitleList("Danh sách các danh lam thắng cảnh");
+
+						}
+					stage.setScene(scene);
+			 }
+			 if (previousPage.get(previousPage.size()-1) == "search") {
+				 previousPage.remove(previousPage.size()-1);
+					loader.setLocation(getClass().getResource("/search.fxml"));
+					Parent detailParent = loader.load();
+					Scene scene = new Scene(detailParent);
+					stage.setScene(scene);
+			 }
+		 }
+		  
+		 else   {
+			  if (previousPage.get(previousPage.size()-2)=="list" ||previousPage.get(previousPage.size()-2)=="search" ) {
+				  Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					FXMLLoader loader1 = new FXMLLoader();
+					loader1.setLocation(getClass().getResource("/DetailEntityView.fxml"));
+					Parent detailParent = loader1.load();			
+					Scene scene = new Scene(detailParent);
+					DetailEntityController detailController = loader1.getController();
+					//detailController.setPreviousPage("relatedId");
+					System.out.println("Back trước "+previousPage);
+
+					
+
+					System.out.println("Back "+previousPage);
+					detailController.detailView(idPreviousPage);
+					previousPage.remove(previousPage.size()-1);
+					stage1.setScene(scene);
+			  }
+			  else {
+				  Stage stage1 = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					FXMLLoader loader1 = new FXMLLoader();
+					loader1.setLocation(getClass().getResource("/DetailEntityView.fxml"));
+					Parent detailParent = loader1.load();			
+					Scene scene = new Scene(detailParent);
+					DetailEntityController detailController = loader1.getController();
+					//detailController.setPreviousPage("relatedId");
+					System.out.println("Back trước "+previousPage);
+
+					
+					previousPage.remove(previousPage.size()-1);
+
+					System.out.println("Back "+previousPage);
+					detailController.detailView(previousPage.get(previousPage.size()-1));
+					stage1.setScene(scene);
+			  }
+			 
+		 }
 		
-		loadFileJson load = new loadFileJson();
-		BaseEntity entity = load.getEntityById(idString);
-		
-		listEntityController listEntityController = loader.getController();
-		listEntityController.createList(entity.getType());
-		String type = entity.getType();
-		listEntityController.createList(type);
-		if (type == Constant.CHARACTER_ENTITY) {
-			listEntityController.setTitleList("Danh sách các nhân vật lịch sử");
-
-		} 
-		else if (type == Constant.DYNASTY_ENTITY) {
-			listEntityController.setTitleList("Danh sách các triều đại lịch sử");
-
-		}
-		 else if (type == Constant.EVENT_ENTITY) {
-				listEntityController.setTitleList("Danh sách các sự kiện lịch sử");
-
-			}
-		 else if (type == Constant.FESTIVAL_ENTITY) {
-				listEntityController.setTitleList("Danh sách các Lễ hội");
-
-			}
-		 else if (type == Constant.RELIC_PLACE_ENTITY) {
-				listEntityController.setTitleList("Danh sách các danh lam thắng cảnh");
-
-			}
-		stage.setScene(scene);
     }
+    
 
     
 

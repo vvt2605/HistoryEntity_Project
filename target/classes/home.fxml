@@ -11,76 +11,90 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.HomeController">
    <children>
-      <AnchorPane prefHeight="810.0" prefWidth="296.0" style="-fx-background-color: #2262C6;     -fx-background-radius: 0px 50px 0px 0px;">
+      <AnchorPane prefHeight="810.0" prefWidth="296.0" style="-fx-background-color: #2262C6;">
          <children>
-            <VBox layoutY="33.0" prefHeight="767.0" prefWidth="296.0">
+            <VBox layoutY="33.0" prefHeight="778.0" prefWidth="296.0">
                <children>
-                  <Button fx:id="btnHome" alignment="TOP_LEFT" mnemonicParsing="false" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="202.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Trang chủ" textFill="WHITE">
+                  <Button fx:id="btnHome" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onMouseEntered="#btnHover" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Trang chủ" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="40.0" />
+                        <Insets left="20.0" />
                      </VBox.margin></Button>
-                  <Button fx:id="btnFestival" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#pressBtnEntity" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Lễ hội" textFill="WHITE">
+                  <Button fx:id="btnSearch" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressSearchBtn" onMouseEntered="#btnHover" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Tìm kiếm thông tin" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="40.0" />
+                        <Insets left="20.0" top="16.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="btnCharacter" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#pressBtnEntity" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Nhân vật lịch sử" textFill="WHITE">
+                  <Button fx:id="btnFestival" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtnEntity" onMouseEntered="#btnHover" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Lễ hội" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="40.0" />
+                        <Insets left="20.0" top="16.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="btnRelic" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#pressBtnEntity" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="250.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Danh lam thắng cảnh" textFill="WHITE">
+                  <Button fx:id="btnCharacter" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtnEntity" onMouseEntered="#btnHover" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Nhân vật lịch sử" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>
                      <VBox.margin>
-                        <Insets left="40.0" />
+                        <Insets left="20.0" top="16.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="btnSearch" alignment="CENTER" mnemonicParsing="false" onAction="#pressSearchBtn" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="245.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Tìm kiếm thông tin" textFill="WHITE">
+                  <Button fx:id="btnRelic" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtnEntity" onMouseEntered="#btnHover" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Danh lam thắng cảnh" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets left="20.0" top="16.0" />
+                     </VBox.margin>
                   </Button>
-                  <Button fx:id="btnDynasty" alignment="CENTER" mnemonicParsing="false" onAction="#pressBtnEntity" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="294.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Dòng Sự kiện và Triều đại" textFill="WHITE">
+                  <Button fx:id="btnDynasty" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressBtnEntity" onMouseEntered="#btnHover" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Dòng Sự kiện và Triều đại" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets left="20.0" top="16.0" />
+                     </VBox.margin>
                   </Button>
-                  <Button fx:id="btnStatistic" alignment="CENTER" mnemonicParsing="false" onAction="#pressStatistic" onMouseEntered="#btnHover" prefHeight="50.0" prefWidth="226.0" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Thống kê dữ liệu" textFill="WHITE">
+                  <Button fx:id="btnStatistic" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#pressStatistic" onMouseEntered="#btnHover" style="-fx-background-color: #2262C6; -fx-opacity: 0.7; -fx-background-radius: 8px;" text="Thống kê dữ liệu" textFill="WHITE">
                      <font>
                         <Font name="Times New Roman" size="18.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets left="20.0" top="16.0" />
+                     </VBox.margin>
                   </Button>
-                  <AnchorPane prefHeight="356.0" prefWidth="296.0">
+                  <AnchorPane prefHeight="334.0" prefWidth="296.0">
                      <children>
                         <Label fx:id="updateLabel" alignment="CENTER" layoutY="348.0" prefHeight="24.0" prefWidth="296.0" text="Cập nhật mới nhât lúc:  2023-07-10 17:48:47" textFill="WHITE">
                            <font>
                               <Font size="12.0" />
                            </font>
                         </Label>
-                        <Button fx:id="btnUpdateData" alignment="CENTER" layoutX="-16.0" layoutY="302.0" mnemonicParsing="false" onAction="#pressUpdateData" onMouseEntered="#btnHover" prefHeight="46.0" prefWidth="297.0" style="-fx-background-color: #2262C6; -fx-background-radius: 8px;" text="Cập nhật dữ liệu" textFill="WHITE">
+                        <Button fx:id="btnUpdateData" alignment="CENTER" layoutY="302.0" mnemonicParsing="false" onAction="#pressUpdateData" onMouseEntered="#btnHover" prefHeight="46.0" prefWidth="294.0" style="-fx-background-color: #2262C6; -fx-background-radius: 8px;" text="Cập nhật dữ liệu" textFill="WHITE">
                            <font>
                               <Font name="Times New Roman" size="18.0" />
                            </font>
                         </Button>
                      </children>
                   </AnchorPane>
+                  <Label fx:id="thongBao" alignment="CENTER" prefHeight="20.0" prefWidth="290.0" textFill="WHITE">
+                     <font>
+                        <Font size="12.0" />
+                     </font>
+                  </Label>
                </children>
             </VBox>
          </children></AnchorPane>
-      <ImageView fitHeight="691.0" fitWidth="1139.0" layoutX="296.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="826.0" fitWidth="1147.0" layoutX="296.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="file:/C:/Workspace/Java/HistoryEntity13/src/main/resources/backgr1.png" />
+            <Image url="file:/C:/Workspace/Java/HistoryEntity13/src/main/resources/last_img.png" />
          </image>
       </ImageView>
    </children>

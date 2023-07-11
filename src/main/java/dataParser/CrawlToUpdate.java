@@ -13,7 +13,8 @@ import crawler.FestivalWikiCrawler;
 import crawler.Character;
 
 public class CrawlToUpdate {
-	List<AbstractCrawler> crawlers;
+	public static List<AbstractCrawler> crawlers = new ArrayList<>();
+
 	
 
 	public void addCrawlers() {
@@ -30,7 +31,20 @@ public class CrawlToUpdate {
 	}
 	
 	public void crawlData() {
-		addCrawlers();
+		if (!crawlers.isEmpty()) {
+			return;
+		}
+		crawlers.add(new Character());
+		crawlers.add(new RelicnguoikesuCrawler());
+		//crawlers.add(new RelicWikiCrawler());
+		//crawlers.add(new CharacterWiki());
+		//crawlers.add(new FestivalWikiCrawler());
+		//crawlers.add(new DynastyWiki());
+		//crawlers.add(new Dynasty());
+		 
+		// crawlers.add(new Count());
+		// crawlers.add(new JSonMerge());
+
 		for (AbstractCrawler cr : crawlers) {
 			try {
 				cr.start();

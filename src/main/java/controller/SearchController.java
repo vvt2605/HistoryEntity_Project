@@ -126,6 +126,7 @@ public class SearchController implements Initializable {
         		        
         		        button.prefWidthProperty().bind(listEntitySearch.widthProperty());
         		        VBox.setMargin(button, new Insets(4, 4, 4, 4));
+        		        button.setAlignment(Pos.CENTER_LEFT);
         		        listEntitySearch.getChildren().add(button);
         		    }
         		
@@ -147,6 +148,9 @@ public class SearchController implements Initializable {
 			Scene scene = new Scene(detailParent);
 			DetailEntityController detailController = loader.getController();
 			detailController.detailView(id);
+			detailController.setPreviousPage("search");
+			detailController.setId(id);
+
 			stage.setScene(scene);
 			
 		}
